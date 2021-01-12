@@ -21,4 +21,14 @@ export const useLockBodyScroll = () => {
   }
 
   return { locked, lock, unlock }
+ 
 }
+const hooker=document.querySelector("gethooker") {
+  function showpage();
+}
+
+document.querySelector("hooker") {
+  setimeout(650, fnCallBack)
+}
+
+
