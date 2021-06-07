@@ -15,9 +15,14 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
   ],
+  settings: {
+    react: {
+      version: "16.13.1",
+    },
+  },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "tsconfig.json",
@@ -30,6 +35,10 @@ module.exports = {
     "jsdoc",
     "prefer-arrow",
   ],
+  globals: {
+    React: true,
+    JSX: true,
+  },
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": [
@@ -86,7 +95,7 @@ module.exports = {
         },
       },
     ],
-    "@typescript-eslint/naming-convention": "error",
+    "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-explicit-any": "off",
@@ -153,8 +162,7 @@ module.exports = {
     "no-console": "off",
     "no-constant-condition": "error",
     "no-debugger": "error",
-    "no-duplicate-case": "error",
-    "no-duplicate-imports": "error",
+    "no-duplicate-imports": "warn",
     "no-empty": "error",
     "no-eval": "error",
     "no-extra-bind": "error",
@@ -185,7 +193,6 @@ module.exports = {
     "no-var": "error",
     "object-shorthand": "error",
     "one-var": ["error", "never"],
-    "prefer-arrow/prefer-arrow-functions": "error",
     "prefer-const": "error",
     "prefer-object-spread": "error",
     "quote-props": "off",
@@ -208,9 +215,7 @@ module.exports = {
       "error",
       {
         rules: {
-          "object-curly-spacing": true,
           "prefer-conditional-expression": true,
-          "react-hooks-nesting": true,
           typedef: [
             true,
             "parameter",

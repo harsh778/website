@@ -14,7 +14,9 @@ import "prismjs/components/prism-python"
 import "prismjs/components/prism-yaml"
 import "prismjs/plugins/line-numbers/prism-line-numbers.css"
 import React, { FC, useEffect } from "react"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 import * as SC from "./styles"
+import "./env";
 
 interface IMarkdownProps {
   content: string
@@ -30,8 +32,9 @@ export const Markdown: FC<IMarkdownProps> = ({ content, ...restProps }) => {
   }, [])
   return (
     <SC.MarkdownWrapper
-      dangerouslySetInnerHTML={{ __html: content }}
       {...restProps}
-    />
+    >
+      <MDXRenderer>{content}</MDXRenderer>
+    </SC.MarkdownWrapper>
   )
 }

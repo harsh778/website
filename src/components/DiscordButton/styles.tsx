@@ -1,9 +1,8 @@
 import styled from "styled-components"
-import DiscordLogo from "../../images/discord-logo.svg"
+import DiscordLogo from "../../images/discord-logo"
 
 export const DiscordButtonWrapper = styled.a`
-  margin-top: 32px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-family: "Montserrat", sans-serif;
   font-size: 24px;

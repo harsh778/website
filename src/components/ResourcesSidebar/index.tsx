@@ -18,7 +18,7 @@ const ALL_RESOURCES = graphql`
       edges {
         node {
           relativePath
-          childMarkdownRemark {
+          childMdx {
             frontmatter {
               authors
               title
@@ -31,7 +31,7 @@ const ALL_RESOURCES = graphql`
       edges {
         node {
           relativePath
-          childMarkdownRemark {
+          childMdx {
             frontmatter {
               authors
               title
@@ -123,6 +123,8 @@ function Folder({ item }: { item: IFolder }) {
 const FirstLevelFolder = memo(({ item }: { item: IFolder }) => {
   const { setCurrent } = useSidebar()
 
+  const isProject = item.path.startsWith("/resources/projects")
+
   useMatchingPath(item.path, () => {
     setCurrent(item.title)
   })
@@ -133,13 +135,21 @@ const FirstLevelFolder = memo(({ item }: { item: IFolder }) => {
     <SC.TreeWrapper className="firstLevel">
       <SC.FirstLabel>{humanize(item.title)}</SC.FirstLabel>
       <SC.Children>
-        {sortedChildren.map((node) => (
-          <Tree key={node.title + "-tree"} item={node} />
-        ))}
+        {sortedChildren
+          .filter((child) => {
+            // TODO: clean me up, temporary fix
+            if (isProject && child.title === "intro") return false
+            return true
+          })
+          .map((node) => (
+            <Tree key={node.title + "-tree"} item={node} />
+          ))}
       </SC.Children>
     </SC.TreeWrapper>
   )
 })
+
+FirstLevelFolder.displayName = "FirstLevelFolder"
 
 const ResourceList: FC<{
   items: IFileOrFolder[]
@@ -150,8 +160,9 @@ const ResourceList: FC<{
   return (
     <SC.StyledResourceList>
       {items.map((item) => (
-        <SC.Resource
+        <SC.PageLink
           key={item.title}
+          to={getPath(item)}
           className={current === item.title ? "active" : ""}
           onClick={() => {
             setCurrent(item.title)
@@ -159,7 +170,7 @@ const ResourceList: FC<{
           }}
         >
           {item.title}
-        </SC.Resource>
+        </SC.PageLink>
       ))}
     </SC.StyledResourceList>
   )

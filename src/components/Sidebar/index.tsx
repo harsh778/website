@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, PropsWithChildren } from "react"
+import React, { FC, HTMLAttributes } from "react"
 import Scrollbar from "react-perfect-scrollbar"
 import "react-perfect-scrollbar/dist/css/styles.css"
 import cx from "classnames"
@@ -17,28 +17,32 @@ const MenuItem: FC<IMenuItemProps> = ({ children, to }) => {
   )
 }
 
-export const Sidebar: FC<PropsWithChildren<HTMLAttributes<HTMLDivElement>>> = (
-  props
-) => {
+export const Sidebar: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   const { children, ...restProps } = props
 
   return (
     <SC.SidebarWrapper {...restProps}>
       <Scrollbar>
-        <SC.Title to="/">
-          The
-          <br />
-          Programmer's
-          <br />
-          Hangout
-        </SC.Title>
+        <SC.Header to="/">
+          <SC.Logo>
+            <SC.StyledLogo />
+          </SC.Logo>
+          <SC.Title>
+            The Programmer&apos;s
+            <br />
+            Hangout
+          </SC.Title>
+        </SC.Header>
+
         <SC.Inner>
           {children}
 
           <SC.Menu className={cx({ "has-border": Boolean(children) })}>
             <MenuItem to="/about">about</MenuItem>
             <MenuItem to="/rules">rules</MenuItem>
+            <MenuItem to="/beginners">beginners</MenuItem>
             <MenuItem to="/faq">faq</MenuItem>
+            <MenuItem to="/bots">bots</MenuItem>
             <MenuItem to="/resources">resources</MenuItem>
             <MenuItem to="/archives">tech spotlights</MenuItem>
           </SC.Menu>

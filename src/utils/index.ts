@@ -5,7 +5,7 @@ import pipe from "ramda/es/pipe"
 import sort from "ramda/es/sort"
 
 import { IFile, IFileOrFolder, IFolder, ITocItem } from "../types"
-import { MarkdownRemark } from "../../generated/graphql"
+import { Mdx } from "../../generated/graphql"
 
 const slugger = new GithubSlugger()
 
@@ -141,12 +141,12 @@ export function join([head, ...tail]: IFileOrFolder[]): IFileOrFolder[] {
   return [current, ...join(remaining)]
 }
 
-export function buildToc(headings: MarkdownRemark["headings"]): ITocItem[] {
+export function buildToc(headings: Mdx["headings"]): ITocItem[] {
   if (!headings) {
     return []
   }
 
-  const strip = (value: string) => value.replace(/^(\d*\-)(.*)/, "$2")
+  const strip = (value: string) => value.replace(/^(\d*-)(.*)/, "$2")
 
   slugger.reset()
 

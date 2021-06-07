@@ -1,7 +1,7 @@
 import { transparentize } from "polished"
 import styled from "styled-components"
 import { fontFamily } from "../../design/typography"
-import Logo from "../../images/tph-logo.svg"
+import Logo from "../../images/tph-logo"
 
 export const MobileHeaderWrapper = styled.div`
   z-index: 50;
@@ -20,6 +20,13 @@ export const MobileHeaderWrapper = styled.div`
 
   @media screen and (max-width: 767px) {
     display: flex;
+  }
+
+  /* known bug: "} expected ts-styled-plugin(9999)" https://github.com/microsoft/typescript-styled-plugin/issues/51 */
+  @-moz-document url-prefix() {
+    & {
+      background: inherit;
+    }
   }
 `
 
